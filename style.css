@@ -169,6 +169,7 @@ section {
 
 .numbers > div:nth-child(10) {
   color: red;
+  font-weight: bold;
 }
 
 .fs-1rem {
