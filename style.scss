@@ -1,0 +1,124 @@
+@use "sass:color";
+@use "variables.scss" as v;
+@use "function.scss" as f;
+
+@mixin article-box($color, $border-color, $font-size: 1rem) {
+   color: color.adjust($color, $lightness: -10%);
+   border: f.unit-conversion(1) solid color.adjust($border-color, $lightness: 0%);
+   font-size: $font-size;
+   padding: f.unit-conversion(10) f.unit-conversion(20);
+   text-align: center;
+}
+
+.header-styles {
+   color: v.$color3;
+   text-align: center;
+   margin: f.unit-conversion(25) auto 0;
+}
+
+h1 {
+   max-width: f.unit-conversion(390);
+   border-bottom: f.unit-conversion(3) solid color.adjust(v.$color2, $lightness: +30%);
+}
+
+.h2 {
+   @extend .header-styles;
+   padding: 1rem;
+   border: f.unit-conversion(1) solid color.adjust(red, $lightness: -10%);
+   max-width: f.unit-conversion(250);
+}
+
+.main-div {
+   // height: $div-height;
+   border: f.unit-conversion(1) v.$border;
+   margin: f.unit-conversion(10);
+   // padding: $gap;
+}
+
+section {
+   // max-width: 100%;
+   display: grid;
+   margin: f.unit-conversion(5) f.unit-conversion(10);
+   padding: f.unit-conversion(10);
+   grid-template-columns: repeat(4, 1fr);
+   // grid-template-rows: 1fr;
+}
+
+.blue {
+   @include article-box(blue, green)
+}
+
+.red {
+   @include article-box(red, green)
+}
+
+.footer {
+   @include article-box(v.$color3, v.$color2, f.unit-conversion(24));
+   margin: f.unit-conversion(5) f.unit-conversion(20) f.unit-conversion(15);
+   padding: f.unit-conversion(15) f.unit-conversion(10);
+   display: grid;
+   grid-template-columns: 4fr;
+}
+
+.footer-article {
+   display: flex;
+   justify-content: center;
+}
+
+.numbers {
+   display: flex;
+   margin: 0;
+}
+
+.numbers>div {
+   height: f.unit-conversion(45);
+   width: f.unit-conversion(45);
+   border: f.unit-conversion(1) solid color.adjust(red, $lightness: -10%);
+   margin: 0 f.unit-conversion(11);
+}
+
+$num-colors: (
+   "1": color.adjust(black, $lightness: 95%),
+   "2": color.adjust(black, $lightness: 90%),
+   "3": color.adjust(black, $lightness: 85%),
+   "4": color.adjust(black, $lightness: 80%),
+   "5": color.adjust(black, $lightness: 75%),
+   "6": color.adjust(black, $lightness: 70%),
+   "7": color.adjust(black, $lightness: 65%),
+   "8": color.adjust(black, $lightness: 60%),
+   "9": color.adjust(black, $lightness: 55%),
+   "10": color.adjust(blue),
+   "11": color.adjust(black, $lightness: 45%),
+   "12": color.adjust(black, $lightness: 40%),
+   "13": color.adjust(black, $lightness: 35%),
+   "14": color.adjust(black, $lightness: 30%),
+   "15": color.adjust(black, $lightness: 25%),
+   "16": color.adjust(black, $lightness: 20%),
+   "17": color.adjust(black, $lightness: 15%),
+   "18": color.adjust(black, $lightness: 10%),
+   "19": color.adjust(black, $lightness: 5%),
+);
+
+@each $key,
+$value in $num-colors {
+   .numbers>div:nth-child(#{$key}) {
+      background-color: $value;
+      color: color.invert($value)
+   }
+}
+
+.numbers>div:nth-child(10) {
+   color: red;
+}
+
+.fs-1rem {
+   font-size: 1rem;
+}
+
+.fs-2rem {
+   font-size: 2rem;
+}
+
+.fs-3rem {
+   font-size: 3rem;
+}
